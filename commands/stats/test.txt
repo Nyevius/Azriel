@@ -1,0 +1,1 @@
+https://github.com/aloshai/discord-stats-bot.git

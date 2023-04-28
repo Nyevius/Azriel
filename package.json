@@ -1,0 +1,23 @@
+{
+  "name": "Azriel",
+  "version": "1.1",
+  "description": "A multi-function bot made for the 2023 NSI project",
+  "main": "index.js",
+  "engines": {
+    "node": "16.14.2"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.8.0",
+    "fs": "^0.0.2",
+    "glob": "^10.1.0",
+    "@discordjs/builders": "^1.6.1",
+    "dotenv": "^16.0.3",
+    "@discordjs/rest": "^1.7.0",
+    "moment": "^2.29.4",
+    "moment-duration-format": "^2.3.2"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,6 @@
+const { Client, EmbedBuilder, Events, GatewayIntentBits, SlashCommandBuilder } = require('discord.js');
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const { Database } = require("@replit/database");
+const db = new Database();
+
+let messages = ["Bro, leave me the fuck alone. I'm trying to have a break"]
