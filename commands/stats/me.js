@@ -1,4 +1,4 @@
-const { MessageEmbed: DiscordMessageEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const Database = require('../../Helpers/Database');
 const vt = new Database("Database", "Voice");
@@ -32,7 +32,7 @@ module.exports = {
         voiceList = voiceList.map((vd, index)=> `\`${index + 1}.\` ${interaction.client.channels.cache.has(vd.Id) ? interaction.client.channels.cache.get(vd.Id).toString() : "#deleted-channel"}: \`${moment.duration(vd.Total).format("H [hours,] m [minutes]")}\``).join("\n");
         messageList = messageList.length > 10 ? messageList.splice(0, 10) : messageList;
         messageList = messageList.map((md, index)=> `\`${index + 1}.\` ${interaction.client.channels.cache.has(md.Id) ? interaction.client.channels.cache.get(md.Id).toString() : "#deleted-channel"}: \`${md.Total} message\``).join("\n");
-        let embed = new DiscordMessageEmbed();
+        let embed = new MessageEmbed();
         embed.setColor(interaction.member.displayHexColor)
         .setFooter(`${interaction.user.tag} | Powered by Serendia Squad`)
         .setThumbnail(interaction.user.avatarURL({dynamic: true}))
