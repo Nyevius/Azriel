@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, SlashCommandBuilder } = require("discord.js");
 const Database = require('../../Helpers/Database');
 const vt = new Database("Database", "Voice");
 const mdb = new Database("Database", "Message");
@@ -6,10 +6,9 @@ const moment = require("moment");
 require("moment-duration-format");
 
 module.exports = {
-    data: {
-        name: "me",
-        description: "Provides information about your statistics on the server."
-    },
+    data: new SlashCommandBuilder()
+        .setName('me')
+        .addDescription("Provides information about your statistics on the server."),
     async execute(interaction) {
         let voiceData = vt.get(`stats.${interaction.guildId}.${interaction.user.id}`) || {voice: 0, channels: {}};
         let messageData = mdb.get(`stats.${interaction.guildId}.${interaction.user.id}`) || {messages: 0, channels: {}};
