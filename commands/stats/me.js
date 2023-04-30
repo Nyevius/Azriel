@@ -1,4 +1,5 @@
-const { MessageEmbed, SlashCommandBuilder } = require("discord.js");
+const { MessageEmbed: DiscordMessageEmbed } = require("discord.js");
+const { SlashCommandBuilder } = require('@discordjs/builders');
 const Database = require('../../Helpers/Database');
 const vt = new Database("Database", "Voice");
 const mdb = new Database("Database", "Message");
@@ -8,7 +9,7 @@ require("moment-duration-format");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('me')
-        .addDescription("Provides information about your statistics on the server."),
+        .setDescription("Provides information about your statistics on the server."),
     async execute(interaction) {
         let voiceData = vt.get(`stats.${interaction.guildId}.${interaction.user.id}`) || {voice: 0, channels: {}};
         let messageData = mdb.get(`stats.${interaction.guildId}.${interaction.user.id}`) || {messages: 0, channels: {}};
@@ -31,7 +32,7 @@ module.exports = {
         voiceList = voiceList.map((vd, index)=> `\`${index + 1}.\` ${interaction.client.channels.cache.has(vd.Id) ? interaction.client.channels.cache.get(vd.Id).toString() : "#deleted-channel"}: \`${moment.duration(vd.Total).format("H [hours,] m [minutes]")}\``).join("\n");
         messageList = messageList.length > 10 ? messageList.splice(0, 10) : messageList;
         messageList = messageList.map((md, index)=> `\`${index + 1}.\` ${interaction.client.channels.cache.has(md.Id) ? interaction.client.channels.cache.get(md.Id).toString() : "#deleted-channel"}: \`${md.Total} message\``).join("\n");
-        let embed = new MessageEmbed();
+        let embed = new DiscordMessageEmbed();
         embed.setColor(interaction.member.displayHexColor)
         .setFooter(`${interaction.user.tag} | Powered by Serendia Squad`)
         .setThumbnail(interaction.user.avatarURL({dynamic: true}))
