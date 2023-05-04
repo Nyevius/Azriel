@@ -65,7 +65,7 @@ async execute(interaction) {
     
     const embed = new EmbedBuilder()
     .setColor('Red')
-    .setDescription(`${target.tag} has been **timed out* for ${duration/60} minute(s) | ${reason}`)
+    .setDescription(`${target.tag} has been **timed out** for ${duration/60} minute(s) | ${reason}`)
     
     await interaction.reply({embeds: [embed]});
   },

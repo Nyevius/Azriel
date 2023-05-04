@@ -53,7 +53,7 @@ async execute(interaction) {
     
     const embed = new EmbedBuilder()
     .setColor('Green')
-    .setDescription(`${target.tag} has been **untimed out**| ${reason}`)
+    .setDescription(`${target.tag} has been **untimed out** | ${reason}`)
     
     await interaction.reply({embeds: [embed]});
   },
