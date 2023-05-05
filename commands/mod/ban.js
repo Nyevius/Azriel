@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField,  EmbedBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -44,8 +44,22 @@ async execute(interaction) {
         return interaction.reply('Could not find that user.');
     }
 
-    await interaction.reply(`Banning ${targetMember.user.username} for reason: ${reason}`);
+    
     await interaction.guild.members.ban(targetMember);
+  try {
+      const banEmbed = new EmbedBuilder()
+      .setColor("Green")
+      .setTitle("unban")
+      .setDescription(`Banned ${targetMember.user.username} for ${reason}`)
+      await interaction.reply({embeds: [banEmbed]})
+      
+    } catch (err) {
+      const errbanEmbed = new EmbedBuilder()
+      .setColor("Red")
+      .setTitle("error ban")
+      .setDescription(`provide valid user ID`)
+      await interaction.reply({embeds: [errbanEmbed]})
+    }
   },
 
 

@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, EmbedBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -45,8 +45,22 @@ async execute(interaction) {
         return interaction.reply('Could not find that user.');
     }
 
-    await interaction.reply(`kicking ${targetMember.user.username} for reason: ${reason}`);
+    
     await interaction.guild.members.kick(targetMember);
+  try {
+      const kickEmbed = new EmbedBuilder()
+      .setColor("Green")
+      .setTitle("kick")
+      .setDescription(`kicked ${targetMember.user.username} for ${reason}`)
+      await interaction.reply({embeds: [kickEmbed]})
+      
+    } catch (err) {
+      const errbanEmbed = new EmbedBuilder()
+      .setColor("Red")
+      .setTitle("error kick")
+      .setDescription(`provide valid user ID`)
+      await interaction.reply({embeds: [errbanEmbed]})
+    }
   },
 
 
