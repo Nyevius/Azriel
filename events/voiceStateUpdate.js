@@ -12,8 +12,8 @@ module.exports = {
                 permissionOverwrites: [
                     {
                         id: newState.guild.roles.everyone.id,
-                        deny: VoiceChannel.defaultPermissionOverwrites.everyoneConnect,
-                        allow: VoiceChannel.defaultPermissionOverwrites.everyoneSpeak
+                        deny: false,
+                        allow: true
                     },
                     {
                         id: newState.member.id,

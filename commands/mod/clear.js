@@ -30,12 +30,12 @@ module.exports = {
                   await interaction.channel.bulkDelete(fetched);
                 } catch (error) {
                     if (error.code === 50034) {
-                       return interaction.channel.send("Je ne peux pas supprimer des messages de plus de 14 jours !");
+                       return interaction.reply("Je ne peux pas supprimer des messages de plus de 14 jours !");
                     } else {
                         console.error(error);
-                        return interaction.channel.send("Une erreur s'est produite lors de la suppression des messages...");
+                        return interaction.reply("Une erreur s'est produite lors de la suppression des messages...");
                       }
-                    }
+                }
 
                 totalDeleted += fetched.size;
                 remaining -= fetched.size;

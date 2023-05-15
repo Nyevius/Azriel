@@ -9,13 +9,13 @@ module.exports = {
       const guild = interaction.guild;
 
       // Get the last message sent by the user
-      const lastMessage = interaction.user.lastMessage;
+      const lastMessage = (await user.fetch()).lastMessage;
       const lastMessageDate = lastMessage ? lastMessage.createdAt : 'Never';
-      console.log(lastMessage)
+
       // Get the last voice state update for the user
       const lastVoiceStateUpdate = guild.voiceStates.cache.find(s => s.id === user.id)?.updatedAt;
       const lastVoiceStateUpdateDate = lastVoiceStateUpdate ? lastVoiceStateUpdate.toLocaleString() : 'Never';
-      
+
       // Get the number of messages sent by the user in the last 30 days
       const messagesSent = (await guild.channels.cache.filter(channel => channel.type === 'GUILD_TEXT').map(async channel => {
         const messages = await channel.messages.fetch({ limit: 100 });

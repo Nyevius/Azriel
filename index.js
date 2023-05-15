@@ -3,6 +3,7 @@ const path = require("node:path");
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const { token } = require("./config.json");
 const Database = require('./Helpers/Database');
+const createCustomVoiceChannel = require('./events/voiceStateUpdate.js')
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -42,5 +43,11 @@ for (const file of eventFiles) {
     client.on(event.name, (...args) => event.execute(...args));
   }
 }
+
+
+
+client.on('voiceStateUpdate', (oldState, newState) => {
+    createCustomVoiceChannel.execute(oldState, newState);
+});
 
 client.login(token);
